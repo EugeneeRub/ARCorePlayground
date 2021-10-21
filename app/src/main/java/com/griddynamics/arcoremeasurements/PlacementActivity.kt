@@ -88,7 +88,7 @@ class PlacementActivity : AppCompatActivity() {
     private fun renderView(type: Type) {
         ViewRenderable
             .builder()
-            .setView(this, R.layout.text_layout)
+            .setView(this, R.layout.custom_banner)
             .build()
             .thenAccept {
                 mapOfViewRenderable[type] = it
@@ -112,12 +112,6 @@ class PlacementActivity : AppCompatActivity() {
             arFragment.arSceneView.scene.removeChild(anchorNode)
             anchorNode.isEnabled = false
             anchorNode.anchor!!.detach()
-            anchorNode.setParent(null)
-        }
-        mapOfChildAnchors.forEach { result ->
-            val anchorNode = result.value
-            arFragment.arSceneView.scene.removeChild(anchorNode)
-            anchorNode.isEnabled = false
             anchorNode.setParent(null)
         }
 
@@ -163,7 +157,7 @@ class PlacementActivity : AppCompatActivity() {
             node.setParent(parentNode)
             node.worldPosition = Vector3(
                 parentNode.worldPosition.x,
-                parentNode.worldPosition.y + 0.5f, // move to head of our ar object
+                parentNode.worldPosition.y + 0.3f, // move to head of our ar object
                 parentNode.worldPosition.z
             )
             mapOfViewRenderable[whatSelected]?.view?.findViewById<TextView>(R.id.textChildTitle)
