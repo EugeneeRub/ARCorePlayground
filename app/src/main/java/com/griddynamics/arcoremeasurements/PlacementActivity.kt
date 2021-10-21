@@ -2,14 +2,12 @@ package com.griddynamics.arcoremeasurements
 
 import android.net.Uri
 import android.os.Bundle
-import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
-import androidx.core.view.GestureDetectorCompat
 import com.google.ar.core.HitResult
 import com.google.ar.sceneform.AnchorNode
 import com.google.ar.sceneform.Node
@@ -26,8 +24,6 @@ class PlacementActivity : AppCompatActivity() {
     private lateinit var arFragment: ArFragment
     private lateinit var btnClear: AppCompatButton
     private lateinit var spinner: Spinner
-
-    private lateinit var mDetector: GestureDetectorCompat
 
     private val mapOfRenderable = HashMap<Type, ModelRenderable>()
     private val mapOfViewRenderable = HashMap<Type, ViewRenderable>()
@@ -74,11 +70,9 @@ class PlacementActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        arFragment = supportFragmentManager.findFragmentById(R.id.ux_fragment) as ArFragment
+        arFragment = supportFragmentManager.findFragmentById(R.id.ar_fragment) as ArFragment
         btnClear = findViewById(R.id.btn_clear)
         spinner = findViewById(R.id.spinner)
-
-        mDetector = GestureDetectorCompat(this, MyGestureListener())
     }
 
     private fun initRender() {
@@ -213,12 +207,6 @@ class PlacementActivity : AppCompatActivity() {
                 Toast.makeText(this, "Model prepared", Toast.LENGTH_SHORT).show()
                 mapOfRenderable[type] = it
             }
-    }
-
-    private class MyGestureListener : GestureDetector.SimpleOnGestureListener() {
-        override fun onSingleTapUp(e: MotionEvent?): Boolean {
-            return true
-        }
     }
 
     enum class Type(val title: String, val value: String) {

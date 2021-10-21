@@ -31,6 +31,7 @@
         </activity>
         <activity android:name=".PlacementActivity" />
         <activity android:name=".RulerActivity" />
+        <activity android:name=".DemoActivity" />
 
         <!-- Indicates that app requires ARCore ("AR Required"). Causes the Google
          Play Store to download and install Google Play Services for AR along

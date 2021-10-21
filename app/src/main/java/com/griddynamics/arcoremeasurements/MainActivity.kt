@@ -9,7 +9,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_main)
 
         findViewById<Button>(R.id.btnRuler).setOnClickListener {
@@ -19,6 +18,11 @@ class MainActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.btnPlacement).setOnClickListener {
             val intent = Intent(this, PlacementActivity::class.java)
+            startActivity(intent)
+        }
+
+        findViewById<Button>(R.id.btnDemo).setOnClickListener {
+            val intent = Intent(this, DemoActivity::class.java)
             startActivity(intent)
         }
     }

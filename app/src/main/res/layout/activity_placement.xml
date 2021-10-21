@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <fragment
-        android:id="@+id/ux_fragment"
+        android:id="@+id/ar_fragment"
         android:name="com.google.ar.sceneform.ux.ArFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
