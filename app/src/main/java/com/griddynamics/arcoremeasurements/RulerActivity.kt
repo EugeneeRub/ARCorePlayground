@@ -40,7 +40,9 @@ class RulerActivity : AppCompatActivity(), Scene.OnUpdateListener {
         initRenderables()
         sceneFragment?.setOnTapArPlaneListener { hitResult, plane, motionEvent ->
             if (sphereRenderable == null) return@setOnTapArPlaneListener
-            placeAnchor(hitResult, sphereRenderable!!)
+            if (placedAnchorNodes.size < 4) {
+                placeAnchor(hitResult, sphereRenderable!!)
+            }
         }
     }
 
@@ -66,17 +68,14 @@ class RulerActivity : AppCompatActivity(), Scene.OnUpdateListener {
             return
         }
 
-        if (placedAnchorNodes.size > 5) {
-            clear()
-            return
-        }
-
         var startNode: AnchorNode?
         var endNode: AnchorNode?
 
         for (x in 0 until placedAnchorNodes.size) {
             startNode = placedAnchorNodes[x]
-            endNode = placedAnchorNodes.getOrNull(x + 1)
+            endNode =
+                if (x == 3) placedAnchorNodes.getOrNull(0) else placedAnchorNodes.getOrNull(x + 1)
+
 
             if (endNode == null) {
                 continue
