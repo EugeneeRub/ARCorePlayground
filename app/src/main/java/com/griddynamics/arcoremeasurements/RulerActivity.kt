@@ -24,6 +24,8 @@ class RulerActivity : AppCompatActivity(), Scene.OnUpdateListener {
     private val placedAnchorNodes = ArrayList<AnchorNode>()
     private val midTransformableNodes: MutableMap<String, TransformableNode> = mutableMapOf()
     private val poolMidRenderables = ArrayList<ViewRenderable>()
+    private lateinit var textSquare: TextView
+    private val rectangleSize = mutableListOf(0, 0, 0, 0)
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +34,7 @@ class RulerActivity : AppCompatActivity(), Scene.OnUpdateListener {
 
         initToolbar()
 
+        textSquare = findViewById(R.id.txtSquare)
         sceneFragment = supportFragmentManager.findFragmentById(R.id.scene_fragment) as ArFragment
 
         initRenderables()
@@ -63,6 +66,11 @@ class RulerActivity : AppCompatActivity(), Scene.OnUpdateListener {
             return
         }
 
+        if (placedAnchorNodes.size > 5) {
+            clear()
+            return
+        }
+
         var startNode: AnchorNode?
         var endNode: AnchorNode?
 
@@ -70,19 +78,14 @@ class RulerActivity : AppCompatActivity(), Scene.OnUpdateListener {
             startNode = placedAnchorNodes[x]
             endNode = placedAnchorNodes.getOrNull(x + 1)
 
-            if (x != 0 && x % 4 == 0) {
-                startNode = endNode
-                endNode = placedAnchorNodes.getOrNull(x + 1)
-            }
-
-            if (startNode == null || endNode == null) {
+            if (endNode == null) {
                 continue
             }
 
             val distance = (calculateDistance(
                 startNode.worldPosition,
                 endNode.worldPosition
-            ) * 100).toInt()
+            ) * 100 * 0.39).toInt()
 
             if (distance == 0) {
                 continue
@@ -104,7 +107,15 @@ class RulerActivity : AppCompatActivity(), Scene.OnUpdateListener {
                 ((midTransformableNodes["${x}_${x + 1}"]?.renderable as ViewRenderable?)?.view as TextView)
                     .findViewById<TextView>(R.id.txtDistance)
 
-            textView.text = "$distance cm"
+            textView.text = "$distance inch"
+            rectangleSize[x] = distance
+
+            if (rectangleSize[3] != 0) {
+                val square = rectangleSize[0] * rectangleSize[1]
+                if (square != 0) {
+                    textSquare.text = "Square $square"
+                }
+            }
         }
     }
 
@@ -219,5 +230,8 @@ class RulerActivity : AppCompatActivity(), Scene.OnUpdateListener {
             }
         }
         midTransformableNodes.clear()
+        for (x in 0 until rectangleSize.size) {
+            rectangleSize[x] = 0
+        }
     }
 }
