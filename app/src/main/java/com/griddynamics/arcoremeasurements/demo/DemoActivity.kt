@@ -46,7 +46,7 @@ class DemoActivity : AppCompatActivity() {
 
     private fun setupArFragmentListeners() {
         arFragment.setOnTapArPlaneListener { hitResult, _, _ ->
-            if (whatInventorySelected == null) showBottomView(true) //need to update after
+//            if (whatInventorySelected == null) showBottomView(true)
         }
     }
 

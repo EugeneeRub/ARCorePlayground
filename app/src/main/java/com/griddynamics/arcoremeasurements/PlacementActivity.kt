@@ -30,6 +30,9 @@ class PlacementActivity : AppCompatActivity() {
     private val mapOfAnchorsNode = HashMap<Type, AnchorNode>()
     private val mapOfChildAnchors = HashMap<Type, Node>()
 
+    private val listOfInventory =
+        arrayListOf(Type.SOFA, Type.TABLE, Type.CHAIR, Type.LAMP)
+
     private var whatSelected = Type.SOFA
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,7 +50,7 @@ class PlacementActivity : AppCompatActivity() {
         val distanceModeAdapter = ArrayAdapter(
             applicationContext,
             android.R.layout.simple_spinner_item,
-            arrayListOf(Type.SOFA.title, Type.TABLE.title, Type.CHAIR.title)
+            listOfInventory.map { it.title }
         )
         distanceModeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = distanceModeAdapter
@@ -76,13 +79,11 @@ class PlacementActivity : AppCompatActivity() {
     }
 
     private fun initRender() {
-        renderObject(Type.SOFA)
-        renderObject(Type.TABLE)
-        renderObject(Type.CHAIR)
 
-        renderView(Type.SOFA)
-        renderView(Type.TABLE)
-        renderView(Type.CHAIR)
+        listOfInventory.forEach {
+            renderObject(it)
+            renderView(it)
+        }
     }
 
     private fun renderView(type: Type) {
@@ -206,13 +207,15 @@ class PlacementActivity : AppCompatActivity() {
     enum class Type(val title: String, val value: String) {
         SOFA("Sofa", "file:///android_asset/sofa.glb"),
         TABLE("Table", "file:///android_asset/table.glb"),
-        CHAIR("Chair", "file:///android_asset/chair.glb");
+        CHAIR("Chair", "file:///android_asset/chair.glb"),
+        LAMP("Lamp", "file:///android_asset/lamp.glb");
 
         companion object {
             fun getFromString(title: String) = when (title) {
                 "Sofa" -> SOFA
                 "Table" -> TABLE
                 "Chair" -> CHAIR
+                "Lamp" -> LAMP
                 else -> SOFA
             }
         }
