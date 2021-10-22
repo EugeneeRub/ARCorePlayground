@@ -28,8 +28,8 @@ class RulerActivity : AppCompatActivity(), Scene.OnUpdateListener {
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_ruler)
+
         initToolbar()
 
         sceneFragment = supportFragmentManager.findFragmentById(R.id.scene_fragment) as ArFragment

@@ -79,7 +79,6 @@ class PlacementActivity : AppCompatActivity() {
     }
 
     private fun initRender() {
-
         listOfInventory.forEach {
             renderObject(it)
             renderView(it)
