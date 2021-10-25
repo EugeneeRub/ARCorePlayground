@@ -19,6 +19,7 @@ import com.google.ar.core.HitResult
 import com.google.ar.core.Pose
 import com.google.ar.sceneform.*
 import com.google.ar.sceneform.assets.RenderableSource
+import com.google.ar.sceneform.math.Quaternion
 import com.google.ar.sceneform.math.Vector3
 import com.google.ar.sceneform.rendering.*
 import com.google.ar.sceneform.ux.ArFragment
@@ -44,6 +45,7 @@ class DemoActivity : AppCompatActivity(), Scene.OnUpdateListener {
     private var sphereRenderable: ModelRenderable? = null
     private val placedAnchorNodes = ArrayList<AnchorNode>()
     private val midTransformableNodes: MutableMap<String, TransformableNode> = mutableMapOf()
+    private val placedLineNodes = ArrayList<Node>()
     private val poolMidRenderables = ArrayList<ViewRenderable>()
     private val rectangleSize = mutableListOf(0, 0, 0, 0)
 
@@ -218,6 +220,14 @@ class DemoActivity : AppCompatActivity(), Scene.OnUpdateListener {
                 createRulerMidAnchor(pose, listOf(x, x + 1))
             }
 
+            // place line between anchors
+            val placedLine = placedLineNodes.getOrNull(x)
+            if (placedLine == null) {
+                placeLineNode(startNode, endNode)
+            } else {
+                updateLineBetween(placedLine, startNode, endNode)
+            }
+
             val textView =
                 ((midTransformableNodes["${x}_${x + 1}"]?.renderable as ViewRenderable?)?.view as TextView)
                     .findViewById<TextView>(R.id.txtDistance)
@@ -386,6 +396,35 @@ class DemoActivity : AppCompatActivity(), Scene.OnUpdateListener {
         textSquare.isVisible = false
     }
 
+    private fun placeLineNode(startNode: AnchorNode, endNode: AnchorNode) {
+        val node = Node().apply {
+            setParent(startNode)
+        }
+        placedLineNodes.add(node)
+        updateLineBetween(node, startNode, endNode)
+    }
+
+    private fun updateLineBetween(lineNode: Node, pos1: AnchorNode, pos2: AnchorNode) {
+        val point1: Vector3 = pos1.worldPosition
+        val point2: Vector3 = pos2.worldPosition
+        val difference = Vector3.subtract(point1, point2)
+        val directionFromTopToBottom = difference.normalized()
+        val rotationFromAToB = Quaternion.lookRotation(directionFromTopToBottom, Vector3.up())
+
+        MaterialFactory.makeOpaqueWithColor(
+            applicationContext, Color(0f, 255f, 244f)
+        ).thenAccept { material ->
+            val model = ShapeFactory.makeCube(
+                Vector3(.01f, .01f, difference.length()), Vector3.zero(), material
+            )
+            lineNode.renderable = model
+
+            lineNode.worldPosition = Vector3.add(point1, point2).scaled(.5f)
+            lineNode.worldRotation = rotationFromAToB
+        }
+    }
+
+
     private fun clearPlacement() {
         mapOfAnchorsNode.forEach { result ->
             val anchorNode = result.value
@@ -397,6 +436,7 @@ class DemoActivity : AppCompatActivity(), Scene.OnUpdateListener {
 
         mapOfAnchorsNode.clear()
         mapOfChildAnchors.clear()
+        placedLineNodes.clear()
 
         bottomViewVisibility(false)
     }
