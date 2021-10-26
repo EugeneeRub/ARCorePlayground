@@ -1,9 +1,12 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/txtDistance"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:textColor="@color/white"
+    android:background="@color/white"
     android:gravity="center"
+    android:padding="4dp"
+    android:textAlignment="center"
+    android:textColor="@color/black"
     android:textSize="16sp"
-    android:text="1300"
-    android:textAlignment="center" />
+    tools:text="1300" />

@@ -424,7 +424,6 @@ class DemoActivity : AppCompatActivity(), Scene.OnUpdateListener {
         }
     }
 
-
     private fun clearPlacement() {
         mapOfAnchorsNode.forEach { result ->
             val anchorNode = result.value

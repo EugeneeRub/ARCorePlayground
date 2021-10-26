@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import com.griddynamics.arcoremeasurements.demo.DemoActivity
+import com.griddynamics.arcoremeasurements.demo2.Demo2Activity
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,6 +25,11 @@ class MainActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.btnDemo).setOnClickListener {
             val intent = Intent(this, DemoActivity::class.java)
+            startActivity(intent)
+        }
+
+        findViewById<Button>(R.id.btnDemo2).setOnClickListener {
+            val intent = Intent(this, Demo2Activity::class.java)
             startActivity(intent)
         }
     }

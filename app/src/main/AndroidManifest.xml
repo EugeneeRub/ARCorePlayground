@@ -39,6 +39,10 @@
             android:name=".demo.DemoActivity"
             android:theme="@style/ToolbarTheme" />
 
+        <activity
+            android:name=".demo2.Demo2Activity"
+            android:theme="@style/ToolbarTheme" />
+
         <!-- Indicates that app requires ARCore ("AR Required"). Causes the Google
          Play Store to download and install Google Play Services for AR along
          with the app. For an "AR Optional" app, specify "optional" instead of
