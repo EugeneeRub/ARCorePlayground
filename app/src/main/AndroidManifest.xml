@@ -40,7 +40,7 @@
             android:theme="@style/ToolbarTheme" />
 
         <activity
-            android:name=".demo2.Demo2Activity"
+            android:name=".demo.DemoActivity"
             android:theme="@style/ToolbarTheme" />
 
         <!-- Indicates that app requires ARCore ("AR Required"). Causes the Google
