@@ -27,35 +27,9 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:text="Open Placement"
-        app:layout_constraintBottom_toTopOf="@+id/btnDemo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnRuler" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnDemo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="Demo"
-        app:layout_constraintBottom_toTopOf="@+id/btnDemo2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnPlacement" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnDemo2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="Demo 2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnDemo" />
+        app:layout_constraintTop_toBottomOf="@+id/btnRuler" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
