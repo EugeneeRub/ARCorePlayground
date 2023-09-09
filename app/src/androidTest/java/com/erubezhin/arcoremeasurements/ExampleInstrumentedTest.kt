@@ -1,4 +1,4 @@
-package com.griddynamics.arcoremeasurements
+package com.erubezhin.arcoremeasurements
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

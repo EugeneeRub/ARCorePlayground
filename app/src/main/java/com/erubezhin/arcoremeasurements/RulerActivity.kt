@@ -1,4 +1,4 @@
-package com.griddynamics.arcoremeasurements
+package com.erubezhin.arcoremeasurements
 
 import android.annotation.SuppressLint
 import android.os.Bundle

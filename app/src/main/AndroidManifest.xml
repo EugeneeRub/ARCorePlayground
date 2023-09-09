@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.griddynamics.arcoremeasurements">
+    package="com.erubezhin.arcoremeasurements">
 
     <!-- Both "AR Optional" and "AR Required" apps require CAMERA permission. -->
     <uses-permission android:name="android.permission.CAMERA" />
@@ -31,16 +31,9 @@
         </activity>
 
         <activity android:name=".PlacementActivity" />
+
         <activity
             android:name=".RulerActivity"
-            android:theme="@style/ToolbarTheme" />
-
-        <activity
-            android:name=".demo.DemoActivity"
-            android:theme="@style/ToolbarTheme" />
-
-        <activity
-            android:name=".demo.DemoActivity"
             android:theme="@style/ToolbarTheme" />
 
         <!-- Indicates that app requires ARCore ("AR Required"). Causes the Google
